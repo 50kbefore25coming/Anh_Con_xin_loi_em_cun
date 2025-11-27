@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xin lỗi bé yêu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fce4ec; /* Màu hồng phấn */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Không cho cuộn trang */
+        }
+        h1 { color: #d81b60; margin-bottom: 20px; }
+        p { color: #555; font-size: 18px; margin-bottom: 30px; text-align: center; max-width: 80%; }
+        .buttons { position: relative; }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        #yesBtn {
+            background-color: #4CAF50; /* Màu xanh */
+            color: white;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+        #noBtn {
+            background-color: #f44336; /* Màu đỏ */
+            color: white;
+            position: absolute; /* Để di chuyển tự do */
+        }
+        img { width: 150px; border-radius: 15px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sad cat">
+    
+    <h1>Anh xin lỗi mà!</h1>
+    <p>Anh biết anh sai rồi. Tha lỗi cho anh nha?</p>
+    
+    <div class="buttons">
+        <button id="yesBtn">Okie tha thứ ❤️</button>
+        <button id="noBtn">Không bao giờ</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+
+        // Bấm nút YES
+        yesBtn.addEventListener('click', () => {
+            alert("Yêu bé nhiều lắm! Tối nay anh qua đón đi ăn nhé!");
+            // Có thể đổi dòng trên thành chuyển hướng web: window.location.href = "link_facebook_cua_ban";
+        });
+
+        // Nút NO bỏ chạy
+        noBtn.addEventListener('mouseover', () => {
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.position = 'fixed'; // Cố định để chạy khắp màn hình
+        });
+        
+        // Hỗ trợ cảm ứng trên điện thoại (chạm vào là chạy)
+        noBtn.addEventListener('touchstart', () => {
+             const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.position = 'fixed';
+        });
+    </script>
+
+</body>
+</html>
