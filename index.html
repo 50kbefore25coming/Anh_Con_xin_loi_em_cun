@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xin lỗi bé yêu</title>
+    <title>Xin lỗi Cún yêu</title>
     <style>
+        /* Phần CSS cơ bản giữ nguyên */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #fce4ec; /* Màu hồng phấn */
+            background-color: #fce4ec;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Không cho cuộn trang */
+            overflow: hidden;
         }
-        h1 { color: #d81b60; margin-bottom: 20px; }
-        p { color: #555; font-size: 18px; margin-bottom: 30px; text-align: center; max-width: 80%; }
-        .buttons { position: relative; }
+        h1 { color: #d81b60; margin-bottom: 20px; transition: all 0.3s; }
+        p { color: #555; font-size: 18px; margin-bottom: 30px; text-align: center; max-width: 80%; transition: all 0.3s; }
+        .buttons { position: relative; transition: all 0.3s; }
         button {
             padding: 15px 30px;
             font-size: 18px;
@@ -29,50 +30,81 @@
             transition: all 0.3s;
         }
         #yesBtn {
-            background-color: #4CAF50; /* Màu xanh */
-            color: white;
+            background-color: #4CAF50; color: white;
             box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
         }
         #noBtn {
-            background-color: #f44336; /* Màu đỏ */
-            color: white;
-            position: absolute; /* Để di chuyển tự do */
+            background-color: #f44336; color: white;
+            position: absolute;
         }
-        img { width: 150px; border-radius: 15px; margin-bottom: 20px; }
+
+        /* CSS MỚI: Cho ảnh GIF buồn ban đầu */
+        #sadCat {
+            width: 150px; border-radius: 15px; margin-bottom: 20px;
+            transition: all 0.5s; /* Hiệu ứng biến mất mượt mà */
+        }
+
+        /* CSS MỚI: Cho ảnh VUI hiện ra sau đó (Mặc định là ẩn) */
+        #happyImage {
+            display: none; /* Ẩn đi lúc đầu */
+            width: 80%;    /* To hơn một chút cho hoành tráng */
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: popUp 0.5s ease-out; /* Hiệu ứng nảy lên */
+        }
+        /* Hiệu ứng nảy lên khi hiện ảnh */
+        @keyframes popUp {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
 
-    <img src="https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif" alt="Sad cat">
+    <img id="sadCat" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2hwNTVsaW9waHgyejFsNXdtMHQ3bmFoZTNsbTJncXE2MHkwN3R2eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/B2TG4Rx3gPuMw/giphy.gif" alt="Sad cat">
     
-    <h1>Anh xin lỗi mà!</h1>
-    <p>Anh biết anh sai rồi. Tha lỗi cho anh nha?</p>
+    <img id="happyImage" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Y3pjbXNub3dsYW42Znk5OTcwcWZlYzNkNW14b3FiNXVqaXI4MTJoNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lS5cyliC2h3xj06inX/giphy.gif" alt="Happy image">
+
+    <h1 id="mainTitle">Anh xin lỗi Cún</h1>
+    <p id="subTitle">Anh biết anh sai rồi. Tha lỗi cho anh nha</p>
     
-    <div class="buttons">
-        <button id="yesBtn">Okie tha thứ ❤️</button>
+    <div class="buttons" id="buttonContainer">
+        <button id="yesBtn">Đựt em tha thứ ❤️</button>
         <button id="noBtn">Không bao giờ</button>
     </div>
 
     <script>
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
+        const happyImage = document.getElementById('happyImage');
+        const sadCat = document.getElementById('sadCat');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const mainTitle = document.getElementById('mainTitle');
+        const subTitle = document.getElementById('subTitle');
 
-        // Bấm nút YES
+        // 👉 KHI BẤM NÚT YES: Hiện ảnh vui, ẩn mấy thứ khác
         yesBtn.addEventListener('click', () => {
-            alert("Yêu bé nhiều lắm! Tối nay anh qua đón đi ăn nhé!");
-            // Có thể đổi dòng trên thành chuyển hướng web: window.location.href = "link_facebook_cua_ban";
+            // 1. Ẩn con mèo buồn, nút bấm và dòng chữ nhỏ
+            sadCat.style.display = 'none';
+            buttonContainer.style.display = 'none';
+            subTitle.style.display = 'none';
+            
+            // 2. Đổi tiêu đề
+            mainTitle.innerText = "Yêu Cún nhất trên đời!";
+            
+            // 3. Hiện ảnh vui vẻ lên
+            happyImage.style.display = 'block';
         });
 
-        // Nút NO bỏ chạy
+        // Nút NO bỏ chạy (giữ nguyên như cũ)
         noBtn.addEventListener('mouseover', () => {
             const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 100);
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
-            noBtn.style.position = 'fixed'; // Cố định để chạy khắp màn hình
+            noBtn.style.position = 'fixed';
         });
-        
-        // Hỗ trợ cảm ứng trên điện thoại (chạm vào là chạy)
         noBtn.addEventListener('touchstart', () => {
              const x = Math.random() * (window.innerWidth - 100);
             const y = Math.random() * (window.innerHeight - 100);
