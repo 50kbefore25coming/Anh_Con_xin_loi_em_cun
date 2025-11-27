@@ -44,4 +44,110 @@
         /* ẢNH */
         #sadCat {
             width: 400px; /* Đã chỉnh thành 400px theo ý bạn */
-            border-radius: 15px; margin-bottom: 20px
+            border-radius: 15px; margin-bottom: 20px;
+            transition: all 0.5s;
+        }
+        #happyImage {
+            display: none;
+            width: 80%; max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: popUp 0.5s ease-out;
+        }
+
+        /* HIỆU ỨNG NỔ TUNG */
+        @keyframes explodeAnimation {
+            0% { transform: scale(1); opacity: 1; background-color: #f44336; }
+            50% { transform: scale(1.5); background-color: #ffeb3b; }
+            100% { transform: scale(3); opacity: 0; display: none; }
+        }
+        
+        .explode {
+            animation: explodeAnimation 0.6s forwards;
+            pointer-events: none;
+        }
+        
+        /* Dòng thông báo số lần bấm */
+        #countMsg {
+            color: #d81b60;
+            font-size: 14px;
+            font-style: italic;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <img id="sadCat" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2hwNTVsaW9waHgyejFsNXdtMHQ3bmFoZTNsbTJncXE2MHkwN3R2eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/B2TG4Rx3gPuMw/giphy.gif" alt="Sad cat">
+    
+    <img id="happyImage" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Y3pjbXNub3dsYW42Znk5OTcwcWZlYzNkNW14b3FiNXVqaXI4MTJoNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/lS5cyliC2h3xj06inX/giphy.gif" alt="Happy image">
+
+    <h1 id="mainTitle">Anh xin lỗi Cún</h1>
+    <p id="subTitle">Anh biết anh sai rồi. Tha lỗi cho anh nha</p>
+    
+    <div class="buttons" id="buttonContainer">
+        <button id="yesBtn">Đựt em tha thứ ❤️</button>
+        <button id="noBtn">Biến luôn đi</button>
+    </div>
+    
+    <div id="countMsg"></div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const happyImage = document.getElementById('happyImage');
+        const sadCat = document.getElementById('sadCat');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const mainTitle = document.getElementById('mainTitle');
+        const subTitle = document.getElementById('subTitle');
+        const countMsg = document.getElementById('countMsg');
+
+        let count = 0;
+
+        // Xử lý nút YES
+        yesBtn.addEventListener('click', () => {
+            sadCat.style.display = 'none';
+            noBtn.style.display = 'none'; 
+            countMsg.style.display = 'none';
+            
+            // Câu chốt đơn bạn đã sửa
+            mainTitle.innerText = "Yêu Cún nhất trên đời!";
+            subTitle.style.display = 'none';
+            
+            yesBtn.style.display = 'none';
+            happyImage.style.display = 'block';
+        });
+
+        // Hàm xử lý khi chạm vào nút NO
+        function dodgeHandler() {
+            count++;
+            
+            // NẾU BẤM QUÁ 5 LẦN -> NỔ
+            if (count >= 5) {
+                countMsg.innerText = "Bùm! Nút nổ vì Cún quá cứng đầu rồi 🤣";
+                noBtn.innerText = "💥"; 
+                noBtn.classList.add('explode'); 
+                return;
+            }
+
+            // Cập nhật thông báo
+            countMsg.innerText = "Đã né " + count + " lần rồi nha!";
+
+            // Logic chạy trốn
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.position = 'fixed';
+        }
+
+        noBtn.addEventListener('mouseover', dodgeHandler);
+        noBtn.addEventListener('touchstart', dodgeHandler);
+        noBtn.addEventListener('click', dodgeHandler);
+        
+    </script>
+
+</body>
+</html>
